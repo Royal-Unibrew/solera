@@ -1,0 +1,37 @@
+{
+  "public": {
+    "default": {
+      "commerce-core-endpoint": "https://mcstaging2.royal4you.com/dk_da/graphql",
+      "commerce-endpoint": "https://catalog-service-sandbox.adobe.io/graphql",
+      "headers": {
+        "all": {
+          "Store": "royal_unibrew_store"
+        },
+        "cs": {
+          "Magento-Customer-Group": "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c",
+          "Magento-Store-Code": "royal_unibrew_store",
+          "Magento-Store-View-Code": "dk_da",
+          "Magento-Website-Code": "royal_unibrew",
+          "x-api-key": "3f4a110f4c004a43be45c544b2302fd5",
+          "Magento-Environment-Id": "67b6863d-d35a-4bec-a0d9-395bef380cd2"
+        }
+      },
+      "analytics": {
+        "base-currency-code": "USD",
+        "environment": "Production",
+        "store-id": 1,
+        "store-name": "Main Website Store",
+        "store-url": "https://mcstaging2.royal4you.com/dk_da",
+        "store-view-id": 1,
+        "store-view-name": "Default Store View",
+        "website-id": 1,
+        "website-name": "Main Website"
+      },
+      "plugins": {
+        "picker": {
+           "rootCategory": 2
+         }
+      }
+    }
+  }
+}
