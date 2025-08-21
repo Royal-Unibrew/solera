@@ -75,7 +75,6 @@ export interface AppliedGiftCardProps {
     code: string;
     appliedBalance: Price;
     currentBalance: Price;
-    giftCardBalance: Price;
     expirationDate: string;
 }
 interface TotalPriceModifier {
@@ -130,9 +129,6 @@ export interface Item {
         [key: string]: any;
     };
     selectedOptions?: {
-        [key: string]: any;
-    };
-    selectedOptionsUIDs?: {
         [key: string]: any;
     };
     customizableOptions?: {

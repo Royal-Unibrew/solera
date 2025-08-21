@@ -1,22 +1,18 @@
-import { PaymentMethodConfig } from '../../containers';
 import { PaymentMethod } from '../../data/models/payment-method';
-import { UIComponentType } from '../../types/ComponentTypes';
 import { FunctionComponent, VNode } from 'preact';
 import { HTMLAttributes } from 'preact/compat';
+import { PaymentMethodConfig } from '../../containers';
 
 interface ExtendedPaymentMethod extends PaymentMethodConfig, PaymentMethod {
 }
-export interface PaymentMethodsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'loading' | 'title'> {
-    error?: string | null;
+export interface PaymentMethodsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'loading'> {
+    initializing?: boolean;
     loading?: boolean;
-    onDismissError?: () => void;
-    onSelectionChange?: (value: PaymentMethod) => void;
+    onChange?: (value: string) => void;
     options?: ExtendedPaymentMethod[];
     paymentMethodContent?: VNode;
-    selection: PaymentMethod | null;
-    title?: VNode;
-    UIComponentType?: UIComponentType;
+    selection?: string;
 }
-export declare const PaymentMethods: FunctionComponent<PaymentMethodsProps & import('../ConditionalWrapper/ConditionalWrapper').ConditionalProps>;
+export declare const PaymentMethods: FunctionComponent<PaymentMethodsProps>;
 export {};
 //# sourceMappingURL=PaymentMethods.d.ts.map

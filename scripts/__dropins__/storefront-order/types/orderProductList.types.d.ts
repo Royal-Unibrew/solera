@@ -1,6 +1,5 @@
 import { SlotProps } from '@dropins/tools/types/elsie/src/lib';
 import { OrderDataModel, OrderItemModel } from '../data/models';
-import { ImageProps } from '@dropins/tools/types/elsie/src/components';
 
 type options = Record<string, string | number | boolean>;
 export type TaxTypes = {
@@ -10,10 +9,6 @@ export type TaxTypes = {
 export interface OrderProductListProps {
     slots?: {
         Footer: SlotProps;
-        CartSummaryItemImage?: SlotProps<{
-            data: OrderItemModel;
-            defaultImageProps: ImageProps;
-        }>;
     };
     orderData?: OrderDataModel;
     className?: string;
@@ -30,10 +25,6 @@ export interface OrderProductListContentProps extends Omit<OrderProductListProps
 export interface CartSummaryItemProps {
     slots?: {
         Footer: SlotProps;
-        CartSummaryItemImage?: SlotProps<{
-            data: OrderItemModel;
-            defaultImageProps: ImageProps;
-        }>;
     };
     placeholderImage?: string;
     disabledIncrementer?: boolean;

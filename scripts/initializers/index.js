@@ -1,6 +1,5 @@
+/* eslint-disable import/no-cycle */
 // Drop-in Tools
-import { getCookie } from '@dropins/tools/lib.js';
-import { getConfigValue } from '@dropins/tools/lib/aem/configs.js';
 import { events } from '@dropins/tools/event-bus.js';
 import {
   removeFetchGraphQlHeader,
@@ -8,7 +7,9 @@ import {
   setFetchGraphQlHeader,
 } from '@dropins/tools/fetch-graphql.js';
 import * as authApi from '@dropins/storefront-auth/api.js';
-import { fetchPlaceholders } from '../commerce.js';
+
+// Libs
+import { getConfigValue, getCookie } from '../configs.js';
 
 export const getUserTokenCookie = () => getCookie('auth_dropin_user_token');
 
@@ -47,23 +48,17 @@ export default async function initializeDropins() {
     // Event Bus Logger
     events.enableLogger(true);
     // Set Fetch Endpoint (Global)
-    setEndpoint(getConfigValue('commerce-core-endpoint'));
-
-    // Fetch global placeholders
-    await fetchPlaceholders('placeholders/global.json');
+    setEndpoint(await getConfigValue('commerce-core-endpoint'));
 
     // Initialize Global Drop-ins
     await import('./auth.js');
-    await import('./personalization.js');
 
     import('./cart.js');
 
     events.on('aem/lcp', async () => {
       // Recaptcha
-      await import('@dropins/tools/recaptcha.js').then((recaptcha) => {
-        recaptcha.enableLogger(true);
-        recaptcha.setEndpoint(getConfigValue('commerce-core-endpoint'));
-        return recaptcha.setConfig();
+      await import('@dropins/tools/recaptcha.js').then(({ setConfig }) => {
+        setConfig();
       });
     });
   };

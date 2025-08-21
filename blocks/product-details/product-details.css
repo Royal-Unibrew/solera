@@ -1,3 +1,6 @@
+/* stylelint-disable no-empty-source */
+/* stylelint-disable selector-class-pattern */
+
 .product-details__wrapper {
   display: grid;
   grid-template-columns: repeat(var(--grid-1-columns), 1fr);
@@ -15,7 +18,6 @@
 }
 
 .product-details__alert {
-  margin-top: var(--spacing-small);
   margin-bottom: var(--spacing-small);
 }
 
@@ -71,7 +73,7 @@
   margin-top: var(--spacing-xsmall);
 }
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
   .product-details__wrapper {
     grid-template-columns: repeat(var(--grid-3-columns), 1fr);
     grid-column-gap: var(--grid-3-gutters);

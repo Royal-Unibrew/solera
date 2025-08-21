@@ -1,5 +1,4 @@
-import { FunctionComponent, JSX, VNode } from 'preact';
-import { ImageNodeRenderProps } from '@dropins/tools/types/elsie/src/components';
+import { FunctionComponent } from 'preact';
 import { GiftWrappingConfigProps, GiftOptionsViewProps } from '../../../types';
 
 interface GiftOptionModalProps {
@@ -7,7 +6,6 @@ interface GiftOptionModalProps {
     showModal: boolean;
     productName: string;
     view: GiftOptionsViewProps;
-    imageSwatchImageNode?: VNode | ((props: ImageNodeRenderProps) => JSX.Element);
     setShowModal: () => void;
     updateGiftOptions: (name: string, value?: string | boolean | number, extraGiftOptions?: Record<string, string | boolean | number>) => void;
 }

@@ -1,14 +1,16 @@
 import { Price } from './price';
 
+type Code = string;
+type Title = string;
 type Carrier = {
-    code: string;
-    title: string;
+    code: Code;
+    title: Title;
 };
 export type ShippingMethod = {
     amount: Price;
     carrier: Carrier;
-    code: string;
-    title: string;
+    code: Code;
+    title: Title;
     value: string;
     amountExclTax?: Price;
     amountInclTax?: Price;

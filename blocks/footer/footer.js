@@ -1,4 +1,3 @@
-import { getRootPath, isMultistore } from '@dropins/tools/lib/aem/configs.js';
 // Dropin Components
 import {
   Button,
@@ -9,6 +8,7 @@ import {
 import createModal from '../modal/modal.js';
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { getRootPath } from '../../scripts/scripts.js';
 
 /**
  * Toggles all storeSelector sections
@@ -39,7 +39,10 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
 
   // Footer content - Store Switcher
-  if (isMultistore()) {
+  // Check if root metadata exists for multistore
+  const hasRootMeta = getMetadata('root');
+
+  if (hasRootMeta) {
     footer.innerHTML = `
       <div class="storeview-switcher-button"></div>
     `;
@@ -64,7 +67,7 @@ export default async function decorate(block) {
 
     try {
       fragmentStoreView = await loadFragment(storeSwitcherPath);
-      if (!fragmentStoreView) throw new Error(`Footer does not render due to Store Switcher fragment (${storeSwitcherPath}) not found`);
+      if (!fragmentStoreView) throw new Error('Footer does not render due to Store Switcher fragment (/storeswitcher) not found');
     } catch (error) {
       console.error('Error loading store switcher fragment:', error);
       return;

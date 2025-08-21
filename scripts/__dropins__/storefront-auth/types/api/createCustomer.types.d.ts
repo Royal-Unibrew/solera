@@ -24,6 +24,7 @@ export interface Customer {
     firstname: string;
     lastname: string;
     email: string;
+    is_subscribed: boolean;
 }
 interface CreateCustomerResponse {
     customer: Customer;

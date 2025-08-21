@@ -1,17 +1,20 @@
-import { Customer } from '../../data/models';
-import { FunctionComponent, VNode } from 'preact';
-import { HTMLAttributes } from 'preact/compat';
+import { FunctionComponent, HTMLAttributes } from 'preact/compat';
 
-export interface LoginFormProps extends Omit<HTMLAttributes<HTMLFormElement>, 'title'> {
-    customer: Customer | null;
+export interface LoginFormProps extends Omit<HTMLAttributes<HTMLFormElement>, 'loading'> {
+    customerDetails?: {
+        firstName: string;
+        lastName: string;
+        email: string;
+    };
     email: string;
     error: string;
-    headingContent?: VNode;
-    hint: string | VNode;
+    hint: string;
+    loading?: boolean;
     onEmailBlur: (event: Event) => void;
     onEmailChange: (event: Event) => void;
     onEmailInvalid: (event: Event) => void;
-    title?: VNode;
+    onSignInClick?: (email: string) => void;
+    onSignOutClick?: () => void;
 }
-export declare const LoginForm: FunctionComponent<LoginFormProps & import('..').ConditionalProps>;
+export declare const LoginForm: FunctionComponent<LoginFormProps>;
 //# sourceMappingURL=LoginForm.d.ts.map

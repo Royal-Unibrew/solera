@@ -1,17 +1,29 @@
 footer {
-    background-color: var(--color-neutral-100);
+    background-color: #DAF0EE;
     font: var(--type-body-2-default-font);
-    letter-spacing: var(--type-body-2-default-letter-spacing);
+    border-top: 1px solid var(--color-solera-green);
 }
 
 footer .footer > div {
     margin: auto;
-    max-width: 1200px;
+    max-width: 1440px;
     padding: 40px 24px 24px;
 }
 
 footer .footer p {
     margin: 0;
+}
+
+footer .columns img {
+    width: initial;
+}
+
+footer .columns > div {
+    align-items: initial;
+}
+
+.footer-wrapper .columns-wrapper:last-of-type [data-align] {
+    margin-top: 30px;
 }
 
 .storeview-switcher-button {
@@ -66,7 +78,7 @@ footer .footer p {
     margin-bottom: var(--spacing-small);
 }
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
     footer .footer > div {
         padding: 40px 32px 24px;
     }

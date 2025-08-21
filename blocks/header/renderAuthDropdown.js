@@ -1,12 +1,11 @@
-import { getCookie } from '@dropins/tools/lib.js';
+/* eslint-disable import/prefer-default-export */
 import * as authApi from '@dropins/storefront-auth/api.js';
 import { render as authRenderer } from '@dropins/storefront-auth/render.js';
 import { SignIn } from '@dropins/storefront-auth/containers/SignIn.js';
 import { events } from '@dropins/tools/event-bus.js';
-import {
-  CUSTOMER_FORGOTPASSWORD_PATH,
-  rootLink,
-} from '../../scripts/commerce.js';
+import { getCookie } from '../../scripts/configs.js';
+import { CUSTOMER_FORGOTPASSWORD_PATH } from '../../scripts/constants.js';
+import { rootLink } from '../../scripts/scripts.js';
 
 function checkAndRedirect(redirections) {
   Object.entries(redirections).some(([currentPath, redirectPath]) => {

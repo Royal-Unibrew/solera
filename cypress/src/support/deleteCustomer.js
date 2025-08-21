@@ -25,9 +25,5 @@ Cypress.Commands.add('deleteCustomer', deleteCustomer);
 
 // Always delete customer after every test.
 afterEach(() => {
-  if (Cypress.env("isAemAssetsSuite")) {
-    return;
-  }
-
   cy.deleteCustomer();
 });

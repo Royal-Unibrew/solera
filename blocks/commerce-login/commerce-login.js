@@ -1,11 +1,10 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-extraneous-dependencies */
 import { SignIn } from '@dropins/storefront-auth/containers/SignIn.js';
 import { render as authRenderer } from '@dropins/storefront-auth/render.js';
-import {
-  CUSTOMER_ACCOUNT_PATH,
-  CUSTOMER_FORGOTPASSWORD_PATH,
-  checkIsAuthenticated,
-  rootLink,
-} from '../../scripts/commerce.js';
+import { checkIsAuthenticated } from '../../scripts/configs.js';
+import { CUSTOMER_FORGOTPASSWORD_PATH, CUSTOMER_ACCOUNT_PATH } from '../../scripts/constants.js';
+import { rootLink } from '../../scripts/scripts.js';
 
 // Initialize
 import '../../scripts/initializers/auth.js';

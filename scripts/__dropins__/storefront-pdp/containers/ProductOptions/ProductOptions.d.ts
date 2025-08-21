@@ -1,7 +1,6 @@
 import { HTMLAttributes } from 'preact/compat';
 import { Container, SlotProps } from '@dropins/tools/types/elsie/src/lib';
 import { ProductModel } from '../../data/models';
-import { ImageNodeRenderProps, ImageProps } from '@dropins/tools/types/elsie/src/components';
 
 export interface ProductOptionsProps extends HTMLAttributes<HTMLDivElement> {
     hideSelectedValue?: boolean;
@@ -10,15 +9,9 @@ export interface ProductOptionsProps extends HTMLAttributes<HTMLDivElement> {
         [id: string]: string;
     }) => void;
     slots?: {
-        Swatches?: SlotProps<{
+        Swatches: SlotProps<{
             data: ProductModel | null;
             optionsUIDs: string[];
-        }>;
-        SwatchImage?: SlotProps<{
-            data: ProductModel | null;
-            optionsUIDs: string[];
-            imageSwatchContext: ImageNodeRenderProps['imageSwatchContext'];
-            defaultImageProps: ImageProps;
         }>;
     };
 }

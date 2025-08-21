@@ -1,11 +1,15 @@
+/* eslint-disable import/no-cycle */
 /*
  * Fragment Block
  * Include content on a page as a fragment.
  * https://www.aem.live/developer/block-collection/fragment
  */
 
-import { getRootPath } from '@dropins/tools/lib/aem/configs.js';
-import { decorateMain } from '../../scripts/scripts.js';
+import {
+  decorateMain,
+  getRootPath,
+} from '../../scripts/scripts.js';
+
 import {
   loadSections,
 } from '../../scripts/aem.js';
@@ -13,7 +17,7 @@ import {
 /**
  * Loads a fragment.
  * @param {string} path The path to the fragment
- * @returns {Promise<HTMLElement>} The root element of the fragment
+ * @returns {HTMLElement} The root element of the fragment
  */
 export async function loadFragment(path) {
   if (path && path.startsWith('/')) {

@@ -85,6 +85,9 @@ export const signUpUser = (sign_up, isValid = true) => {
   const random = Cypress._.random(0, 10000000);
   const username = `${random}${sign_up.email}`;
   cy.contains("Create account").should("be.visible");
+  if (sign_up.company) {
+    cy.get(fields.authFormUserCompany).clear().type(sign_up.company);
+  }
   if (sign_up.email) {
     cy.get(fields.authFormUserEmail)
       .eq(1)
@@ -103,13 +106,14 @@ export const signUpUser = (sign_up, isValid = true) => {
       .clear()
       .type(sign_up.shortPassword);
   }
+  cy.get(".dropin-picker__select").select("Male");
   createAccount();
 };
 
 export const setPaymentMethod = (paymentMethod) => {
   cy.get(fields.paymentMethods).contains(paymentMethod.name).click();
   if (paymentMethod.name === 'Credit Card') {
-    const { cc_number, cc_exp, cc_cid } = paymentMethod.params;
+    const {cc_number, cc_exp, cc_cid} = paymentMethod.params;
     cy.wait(5000);
     cy.getIFrameField(
       fields.creditCardNumberIFrame,
@@ -145,14 +149,13 @@ export const fillGiftOptiosForm = (className, type = 'order') => {
       .should('be.checked');
   }
 
-  cy.wait(2000);
+  cy.wait(3000);
   cy.get(`${className} ${fields.giftOptionWrapCheckBox}`)
     .click({
       force: true,
     })
     .should('be.checked');
 
-  cy.wait(2000);
   cy.get(`${className} ${fields.giftOptionRecipientName}`)
     .type('giftOptionRecipientName')
     .should('have.value', 'giftOptionRecipientName')
@@ -170,7 +173,7 @@ export const fillGiftOptiosForm = (className, type = 'order') => {
   cy.wait(4000);
 
   cy.get(className).contains('Customize').click();
-  cy.get(`.cart-gift-options-view__modal-grid-item img`)
+  cy.get(`${className} .cart-gift-options-view__modal-grid-item img`)
     .eq(1)
     .click();
   cy.contains('.dropin-button--primary', 'Apply').click();

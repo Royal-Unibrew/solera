@@ -1,6 +1,5 @@
 import { StateUpdater, Dispatch } from 'preact/hooks';
-import { FunctionComponent, JSX, VNode } from 'preact';
-import { ImageNodeRenderProps } from '@dropins/tools/types/elsie/src/components';
+import { FunctionComponent } from 'preact';
 import { GiftWrappingConfigProps, GiftOptionsViewProps, GiftFormDataType, GiftOptionsReadOnlyViewProps, ProductGiftOptionsConfig } from '../../types';
 import { CartModel, Item } from '../../data/models';
 
@@ -18,7 +17,6 @@ export interface GiftOptionsProps {
     areGiftOptionsVisible: Record<string, boolean>;
     view: GiftOptionsViewProps;
     giftOptions: GiftFormDataType;
-    imageSwatchImageNode?: VNode | ((props: ImageNodeRenderProps) => JSX.Element);
     item: Item | ProductGiftOptionsConfig;
     giftWrappingConfig: GiftWrappingConfigProps[] | [];
     updateGiftOptions: (name: string, value?: string | boolean | number, extraGiftOptions?: Record<string, string | boolean | number>) => void;

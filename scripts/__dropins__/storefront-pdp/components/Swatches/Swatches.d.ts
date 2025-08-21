@@ -1,6 +1,5 @@
-import { FunctionComponent, VNode } from 'preact';
-import { HTMLAttributes, JSX } from 'preact/compat';
-import { ImageNodeRenderProps } from '@dropins/tools/types/elsie/src/components';
+import { FunctionComponent } from 'preact';
+import { HTMLAttributes } from 'preact/compat';
 
 declare const supportedTypes: string[];
 type OptionValue = {
@@ -35,7 +34,6 @@ export interface SwatchesProps extends HTMLAttributes<HTMLDivElement> {
         [id: string]: string;
     }) => void;
     selectedUIDs?: string[];
-    imageSwatchNode?: VNode | ((props: ImageNodeRenderProps) => JSX.Element);
 }
 export declare const Swatches: FunctionComponent<SwatchesProps>;
 export {};

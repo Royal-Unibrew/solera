@@ -1,7 +1,4 @@
-import { PaymentMethod } from '../../data/models/payment-method';
-import { UIComponentType } from '../../types/ComponentTypes';
-import { TitleProps } from '../../types/TitleProps';
-import { Container, SlotProps } from '@dropins/tools/types/elsie/src/lib';
+import { SlotProps } from '@dropins/tools/types/elsie/src/lib';
 import { HTMLAttributes } from 'preact/compat';
 
 export interface PaymentMethodRenderCtx {
@@ -12,26 +9,35 @@ export interface PaymentMethodConfig {
     displayLabel?: boolean;
     enabled?: boolean;
     icon?: string;
-    autoSync?: boolean;
+    setOnChange?: boolean;
     render?: SlotProps<PaymentMethodRenderCtx>;
 }
 export interface PaymentMethodsSlot {
     [code: string]: PaymentMethodConfig;
 }
-interface CartSyncError {
-    method: PaymentMethod;
-    error: Error;
+/**
+ * @deprecated This property is deprecated and will be removed in future versions.
+ */
+export interface PaymentMethodsHandlerSlot {
+    [code: string]: PaymentMethodConfig['render'];
 }
-export interface PaymentMethodsProps extends HTMLAttributes<HTMLDivElement>, TitleProps {
+export interface PaymentMethodsProps extends HTMLAttributes<HTMLDivElement> {
+    /**
+     * @deprecated This property is deprecated and will be removed in future versions.
+     */
+    setOnChange?: {
+        [key: string]: boolean;
+    };
     slots?: {
+        /**
+         * @deprecated This property is deprecated and will be removed in future versions, use Methods instead.
+         */
+        Handlers?: PaymentMethodsHandlerSlot;
         Methods?: PaymentMethodsSlot;
-    } & TitleProps['slots'];
-    UIComponentType?: UIComponentType;
-    active?: boolean;
-    autoSync?: boolean;
-    onCartSyncError?: (error: CartSyncError) => void;
-    onSelectionChange?: (method: PaymentMethod) => void;
+    };
 }
-export declare const PaymentMethods: Container<PaymentMethodsProps>;
-export {};
+export declare const PaymentMethods: {
+    ({ hideOnEmptyCart, hideOnVirtualCart, ...props }: import('../../hocs/withConditionalRendering').ConditionalProps & PaymentMethodsProps): import("preact/compat").JSX.Element;
+    displayName: string;
+};
 //# sourceMappingURL=PaymentMethods.d.ts.map

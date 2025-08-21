@@ -7,7 +7,7 @@ export const customerShippingAddress = {
   postCode: '78758',
   telephone: '1234567890',
   email: 'test@example.com',
-  region: Cypress.env('stateShippingId'),
+  region: 'TX,169',
   regionFull: 'Texas',
   countryFull: 'United States',
   countryCode: 'US',
@@ -24,7 +24,7 @@ export const customerBillingAddress = {
   postCode: '12345',
   telephone: '0987654321',
   email: 'test_cypresstest@example.com',
-  region: Cypress.env('stateBillingId'),
+  region: 'NY,127',
   regionFull: 'New York',
   countryFull: 'United States',
   countryCode: 'US',
@@ -47,11 +47,7 @@ export const checkMoneyOrder = {
 
 export const products = {
   configurable: {
-    urlPath: "/products/cypress-configurable-product-latest/CYPRESS456",
-    urlPathWithOptions:  Cypress.env('productUrlWithOptions'),
-  },
-  virtual: {
-    urlPath: "/products/sample-virtual-product/VIRTUAL123",
-    sku: 'VIRTUAL123',
+    urlPath: "/products/frankie-sweatshirt/MH04",
+    urlPathWithOptions: "/products/frankie-sweatshirt/MH04?optionsUIDs=Y29uZmlndXJhYmxlLzU1Ni81Mjk%3D%2CY29uZmlndXJhYmxlLzI3Ny8yMDI%3D"
   },
 };

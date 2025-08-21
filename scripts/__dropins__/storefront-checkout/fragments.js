@@ -101,17 +101,7 @@ const e=`
     middlename
     fax
   }
-`,_=`
-  fragment AVAILABLE_PAYMENT_METHOD_FRAGMENT on AvailablePaymentMethod {
-    code
-    title
-  }
 `,a=`
-  fragment SELECTED_PAYMENT_METHOD_FRAGMENT on SelectedPaymentMethod {
-    code
-    title
-  }
-`,i=`
   fragment CHECKOUT_DATA_FRAGMENT on Cart {
     id
     is_virtual
@@ -124,21 +114,21 @@ const e=`
       ...SHIPPING_CART_ADDRESS_FRAGMENT
     }
     available_payment_methods {
-      ...AVAILABLE_PAYMENT_METHOD_FRAGMENT
+      code
+      title
     }
     selected_payment_method {
-      ...SELECTED_PAYMENT_METHOD_FRAGMENT
+      code
+      title
     }
   }
 
   ${e}
   ${t}
-  ${_}
-  ${a}
-`,r=`
+`,i=`
   fragment CUSTOMER_FRAGMENT on Customer {
     firstname
     lastname
     email
   }
-`;export{_ as AVAILABLE_PAYMENT_METHOD_FRAGMENT,e as BILLING_CART_ADDRESS_FRAGMENT,i as CHECKOUT_DATA_FRAGMENT,r as CUSTOMER_FRAGMENT,a as SELECTED_PAYMENT_METHOD_FRAGMENT,t as SHIPPING_CART_ADDRESS_FRAGMENT};
+`;export{a as CHECKOUT_DATA_FRAGMENT,i as CUSTOMER_FRAGMENT};
