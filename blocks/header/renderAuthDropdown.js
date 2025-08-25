@@ -6,6 +6,8 @@ import { events } from '@dropins/tools/event-bus.js';
 import { getCookie } from '../../scripts/configs.js';
 import { CUSTOMER_FORGOTPASSWORD_PATH } from '../../scripts/constants.js';
 import { rootLink } from '../../scripts/scripts.js';
+import { fetchCustomerCompanies } from '@dropins/company-popup/api/fetchCustomerCompanies.js';
+import { showCompanyPopup } from '@dropins/company-popup/index.js';
 
 function checkAndRedirect(redirections) {
   Object.entries(redirections).some(([currentPath, redirectPath]) => {
@@ -19,7 +21,12 @@ function checkAndRedirect(redirections) {
 
 function renderSignIn(element) {
   authRenderer.render(SignIn, {
-    onSuccessCallback: () => {},
+    onSuccessCallback: async () => {
+      const companies = await fetchCustomerCompanies();
+      if (companies.length) {
+        showCompanyPopup(companies);
+      }
+    },
     formSize: 'small',
     routeForgotPassword: () => rootLink(CUSTOMER_FORGOTPASSWORD_PATH),
   })(element);

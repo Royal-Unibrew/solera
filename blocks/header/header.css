@@ -8,49 +8,17 @@
   --desktop-panel-max-height: 600px;
 }
 
-header .topline {
-    background-color: #DAF0EE;
-    position: fixed;
-    z-index: 99;
-    width: 100%;
-    overflow: hidden;
-}
-
-header .topline .topline-wrapper {
-    margin: 0 auto;
-    max-width: 1440px;
-    padding: 0 32px;
-}
-
-header .topline .topline-wrapper p {
-    font-size: 13px;
-    margin: 0;
-}
-
-header .topline .topline-wrapper .columns img {
-    width: initial;
-}
-
-header .topline .topline-wrapper .columns > div {
-    align-items: center;
-    height: 29px;
-}
-
-header .topline .topline-wrapper .columns > div picture {
-    display: flex;
-}
-
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
   z-index: 3;
   position: fixed;
-    top: 29px;
   border-bottom: 1px solid var(--color-neutral-300);
 }
 
 header nav {
+  box-sizing: border-box;
   display: grid;
   grid-template:
     'hamburger brand tools wrapperPopUpButton' var(--nav-height)
@@ -58,7 +26,7 @@ header nav {
   align-items: center;
   gap: 0 16px;
   margin: auto;
-  max-width: 1440px;
+  max-width: 1248px;
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--type-base-font-family);
@@ -78,7 +46,7 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1440px;
+    max-width: 1264px;
     padding: 0 32px;
   }
 
@@ -181,7 +149,6 @@ header nav .nav-brand {
 }
 
 header nav .nav-brand a {
-    display: flex;
   grid-area: brand;
   flex-basis: 128px;
   font: var(--type-headline-1-font);
@@ -255,10 +222,18 @@ header nav .nav-sections ul > li:empty {
     align-self: unset;
   }
 
+  header .nav-drop {
+    align-self: center;
+  }
+
   header nav .nav-sections .default-content-wrapper > ul > li,
   header nav .nav-sections .nav-drop {
     border-radius: 4px;
     padding: 0 var(--spacing-small);
+  }
+
+  header nav .nav-sections .nav-drop {
+    cursor: pointer;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li a {
@@ -332,19 +307,10 @@ header nav .nav-sections ul > li:empty {
     max-width: var(--desktop-item-panel-max-width);
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li a:hover,
-  header nav .nav-sections .nav-drop[aria-expanded='true'] a {
-    border-bottom: 2px solid var(--color-solera-green);
+  header nav .nav-sections .default-content-wrapper > ul > li:hover,
+  header nav .nav-sections .nav-drop[aria-expanded='true'] {
+    background-color: var(--color-neutral-200);
   }
-
-    header nav .nav-sections .nav-drop .submenu-wrapper a {
-        border-bottom: 0px;
-    }
-
-    header nav .nav-sections .nav-drop .submenu-wrapper a:hover {
-        border-bottom: 2px solid var(--color-solera-green);;
-    }
-
 }
 
 /* tools */
@@ -522,7 +488,6 @@ header .nav-search-input .search_autocomplete .popover-container {
 @media (width >= 1024px) {
   .dropdown-wrapper.nav-tools-wrapper .nav-auth-menu-panel {
     width: 398px;
-      top: 1px;
   }
 }
 
@@ -603,7 +568,6 @@ li
   header .nav-wrapper.active,
   header .nav-wrapper:has( nav[aria-expanded='true']) {
     width: 320px;
-      top: 0;
   }
 
   header .nav-wrapper.active nav .nav-hamburger button,

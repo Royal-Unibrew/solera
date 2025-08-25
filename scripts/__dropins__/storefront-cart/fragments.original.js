@@ -165,7 +165,6 @@ const e=`
     product {
       name
       sku
-      quantity
       gift_message_available
       gift_wrapping_available
       gift_wrapping_price {
@@ -231,7 +230,6 @@ const e=`
         configurable_product_option_uid
         option_label
         value_label
-        configurable_product_option_value_uid
       }
       configured_variant {
         uid
@@ -290,7 +288,7 @@ const e=`
   ${i}
   ${r}
   ${n}
-`,u=`
+`,c=`
   fragment CART_FRAGMENT on Cart {
     id
     total_quantity
@@ -400,5 +398,4 @@ const e=`
 
   ${l}
   ${t}
-`;export{t as APPLIED_GIFT_CARDS_FRAGMENT,n as AVAILABLE_GIFT_WRAPPING_FRAGMENT,u as CART_FRAGMENT,l as CART_ITEM_FRAGMENT,a as DOWNLOADABLE_CART_ITEMS_FRAGMENT,r as GIFT_MESSAGE_FRAGMENT,i as GIFT_WRAPPING_FRAGMENT};
-//# sourceMappingURL=fragments.js.map
+`;export{t as APPLIED_GIFT_CARDS_FRAGMENT,n as AVAILABLE_GIFT_WRAPPING_FRAGMENT,c as CART_FRAGMENT,l as CART_ITEM_FRAGMENT,a as DOWNLOADABLE_CART_ITEMS_FRAGMENT,r as GIFT_MESSAGE_FRAGMENT,i as GIFT_WRAPPING_FRAGMENT};
