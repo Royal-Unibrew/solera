@@ -1,5 +1,3 @@
-/* stylelint-disable selector-class-pattern, no-descending-specificity */
-
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -15,7 +13,6 @@
 /* stylelint-disable no-empty-source */
 :root, .dropin-design {
   /* Adobe Commerce Dropin design tokens */
-    --color-solera-green: #38B6AB;
   --color-brand-300: #6d6d6d;
   --color-brand-500: #454545;
   --color-brand-600: #383838;
@@ -91,7 +88,7 @@
   --spacing-huge: 120px;
   --spacing-xhuge: 144px;
   --spacing-xxhuge: 192px;
-  --type-base-font-family: aptos, roboto, roboto-fallback, system-ui, sans-serif;
+  --type-base-font-family: adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   --type-display-1-font: normal normal 300 6rem/7.2rem var(--type-base-font-family);
   --type-display-1-letter-spacing: 0.04em;
   --type-display-2-font: normal normal 300 4.8rem/5.6rem var(--type-base-font-family);
@@ -128,20 +125,20 @@
   --type-details-overline-letter-spacing: 0.16em;
 
   /* Additional tokens */
-  --type-fixed-font-family: aptos, "Roboto Mono", menlo, consolas, "Liberation Mono", monospace, system-ui, sans-serif;
+  --type-fixed-font-family: adobe-clean, "Roboto Mono", menlo, consolas, "Liberation Mono", monospace, system-ui, sans-serif;
   --background-color: var(--color-neutral-50);
   --nav-height: 6.4rem;
 }
 
 /* fallback font */
 @font-face {
-  font-family: aptos;
+  font-family: adobe-clean;
   size-adjust: 100%;
   src: local("Helvetica");
 }
 
 html, body {
-  height: 100%;
+  min-height: 100%;
 }
 
 html {
@@ -150,6 +147,7 @@ html {
 
 body {
   font: var(--type-body-1-default-font);
+  letter-spacing: var(--type-body-1-default-letter-spacing);
   margin: 0;
   color: var(--color-neutral-800);
   background-color: var(--background-color);
@@ -165,7 +163,7 @@ body:not(.appear) {
 
 header {
   grid-row: 1;
-  height: 94px;
+  height: var(--nav-height);
 }
 
 main {
@@ -186,16 +184,6 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
-/* Target any element with data-align="right" */
-[data-align="right"] {
-    text-align: right;
-}
-
-/* Target any element with data-align="center" */
-[data-align="center"] {
-    text-align: center;
-}
-
 h1,
 h2,
 h3,
@@ -210,26 +198,32 @@ h6 {
 
 h1 {
   font: var(--type-display-1-font);
+  letter-spacing: var(--type-display-1-letter-spacing);
 }
 
 h2 {
   font: var(--type-display-2-font);
+  letter-spacing: var(--type-display-2-letter-spacing);
 }
 
 h3 {
   font: var(--type-display-3-font);
+  letter-spacing: var(--type-display-3-letter-spacing);
 }
 
 h4 {
   font: var(--type-headline-1-font);
+  letter-spacing: var(--type-headline-1-letter-spacing);
 }
 
 h5 {
   font: var(--type-headline-2-strong-font);
+  letter-spacing: var(--type-headline-2-strong-letter-spacing);
 }
 
 h6 {
   font: var(--type-headline-2-default-font);
+  letter-spacing: var(--type-headline-2-default-letter-spacing);
 }
 
 p,
@@ -268,33 +262,15 @@ main pre {
   white-space: pre;
 }
 
+main > div {
+  margin: var(--spacing-xbig) var(--spacing-small);
+}
+
 input,
 textarea,
 select,
 button {
   font: inherit;
-}
-
-select {
-    appearance: none; /* Remove default arrow (most browsers) */
-    -webkit-appearance: none; /* Safari */
-    -moz-appearance: none; /* Firefox */
-    padding: 1rem 3rem 1rem 1.5rem; /* Add room on the right for the arrow */
-    margin-right: 3.5rem;
-    max-width: 100%;
-    display: block;
-    cursor: pointer;
-    outline: 0px;
-    border: 1px solid rgb(233, 226, 226);
-    border-radius: 3px;
-    font-size: 16px;
-    line-height: 1.5;
-
-    /* Add custom arrow */
-    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548L10 12.032l4.484-4.484 1.06 1.06L10 14.15 4.455 8.607z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 2rem;
 }
 
 /* links */
@@ -303,7 +279,7 @@ a:not(.dropin-design a) {
   font: var(--type-body-1-strong-font);
   letter-spacing: var(--type-body-1-strong-letter-spacing);
   text-decoration: none;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 a:not(.dropin-design a):hover {
@@ -322,15 +298,13 @@ button.button {
   border-radius: var(--shape-border-radius-3);
   padding: 0.5em 1.2em;
   font: var(--type-button-2-font);
+  letter-spacing: var(--type-button-2-letter-spacing);
   font-style: normal;
+  font-weight: 500;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-    background-color: #38b6abc7;
-    border: 2px solid var(--color-solera-green);
-    color: var(--color-neutral-50);
-    font-size: 18px;
-    font-weight: 800;
+  background-color: var(--color-brand-500);
   color: var(--color-neutral-50);
   cursor: pointer;
   overflow: hidden;
@@ -342,7 +316,7 @@ main a.button:hover,
 main a.button:focus,
 button.button:hover,
 button.button:focus {
-  background-color: var(--color-solera-green);
+  background-color: var(--color-brand-600);
   cursor: pointer;
 }
 
@@ -403,13 +377,18 @@ main img {
   width: 100%;
 }
 
+/* sections */
+main > .section {
+  margin: var(--spacing-xbig) 0;
+}
+
 .section:empty {
   display: none;
 }
 
 main > .section > div {
-  max-width: 1440px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: auto;
   padding: 0 var(--spacing-medium);
 }
 
@@ -417,7 +396,7 @@ main > .section:first-of-type {
   margin-top: 0;
 }
 
-@media (width >= 900px) {
+@media (min-width: 900px) {
   main > .section > div {
     padding: 0 var(--spacing-big);
   }
@@ -445,7 +424,7 @@ body.columns main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1264px;
   margin: 0 auto;
   padding: var(--spacing-large) var(--spacing-small);
   box-sizing: border-box;
@@ -473,13 +452,17 @@ body.columns main > .section:empty {
   display: none;
 }
 
-@media (width >= 600px) {
+@media (min-width: 600px) {
   body.columns main {
     padding: var(--spacing-large) var(--spacing-big);
   }
 }
 
-@media (width >= 900px) {
+.dropin-product-item-card {
+  border: unset;
+}
+
+@media (min-width: 900px) {
   body.columns main {
     flex-direction: row;
   }

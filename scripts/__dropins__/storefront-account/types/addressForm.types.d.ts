@@ -27,6 +27,7 @@ export interface AddressFormProps {
     showShippingCheckBox?: boolean;
     showBillingCheckBox?: boolean;
     isOpen?: boolean;
+    fieldIdPrefix?: string;
     onSubmit?: () => Promise<void>;
     slots?: {
         AddressFormActions?: SlotProps<AddressFormActionsContext>;
