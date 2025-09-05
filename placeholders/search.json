@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "Key": "Search.PLP.noResults",
+      "Value": "Your search returned no results."
+    },
+    {
+      "Key": "Search.PLP.searchError",
+      "Value": "An error occurred while searching."
+    },
+    {
+      "Key": "Search.SortBy.title",
+      "Value": "Sort By"
+    },
+    {
+      "Key": "Search.SortBy.lowToHigh",
+      "Value": "Low to High"
+    },
+    {
+      "Key": "Search.SortBy.highToLow",
+      "Value": "High to Low"
+    },
+    {
+      "Key": "Search.Facet.showMore",
+      "Value": "Show More"
+    },
+    {
+      "Key": "Search.Facet.showLess",
+      "Value": "Show Less"
+    },
+    {
+      "Key": "Search.Facet.clearAll",
+      "Value": "Clear All"
+    }
+  ]
+}

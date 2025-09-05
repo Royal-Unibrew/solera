@@ -1,2 +1,5 @@
 mountpoints:
   /: https://royalunibrew.sharepoint.com/:f:/r/sites/SoleraSEAdobe/Shared%20Documents/SoleraSE
+folders:
+  /products: /default
+  /categories/: /categories/default
