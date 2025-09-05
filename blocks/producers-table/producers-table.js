@@ -6,14 +6,14 @@ export default async function decorate(block) {
 
   const rows = parseCSV(text);
   const headers = rows.shift();
-  const data = rows.map(r => ({
+  const data = rows.map((r) => ({
     country: r[0],
     producent: r[1],
     omrade: r[2],
     imageUrl: r[3],
     docUrl: r[4],
     embedUrl: r[5],
-    productUrl: r[6]
+    productUrl: r[6],
   }));
 
   // Modal container
@@ -28,7 +28,7 @@ export default async function decorate(block) {
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
 
-// Close modal on click outside content
+  // Close modal on click outside content
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.style.display = 'none';
@@ -45,13 +45,13 @@ export default async function decorate(block) {
   tablesContainer.id = 'country-tables';
   block.appendChild(tablesContainer);
 
-  const countries = [...new Set(data.map(d => d.country))].filter(Boolean).sort();
+  const countries = [...new Set(data.map((d) => d.country))].filter(Boolean).sort();
   const defaultOption = document.createElement('option');
   defaultOption.value = '';
   defaultOption.textContent = 'Alla länder';
   countrySelect.appendChild(defaultOption);
 
-  countries.forEach(country => {
+  countries.forEach((country) => {
     const option = document.createElement('option');
     option.value = country;
     option.textContent = country;
@@ -60,7 +60,7 @@ export default async function decorate(block) {
 
   function renderTable(country) {
     tablesContainer.innerHTML = '';
-    const filtered = country ? data.filter(d => d.country === country) : data;
+    const filtered = country ? data.filter((d) => d.country === country) : data;
 
     const grouped = filtered.reduce((acc, cur) => {
       acc[cur.country] = acc[cur.country] || [];
@@ -75,7 +75,7 @@ export default async function decorate(block) {
       table.appendChild(caption);
 
       const thead = document.createElement('thead');
-      thead.innerHTML = `<tr><th>Producent</th><th>Område</th><th>Bild</th></tr>`;  // Added image column header
+      thead.innerHTML = '<tr><th>Producent</th><th>Område</th><th>Bild</th></tr>'; // Added image column header
       table.appendChild(thead);
 
       const tbody = document.createElement('tbody');
@@ -115,9 +115,9 @@ export default async function decorate(block) {
 
     e.preventDefault();
 
-    const producent = link.dataset.producent;
-    const country = link.dataset.country;
-    const item = data.find(d => d.producent === producent && d.country === country);
+    const { producent } = link.dataset;
+    const { country } = link.dataset;
+    const item = data.find((d) => d.producent === producent && d.country === country);
     if (!item) return;
 
     modalContent.innerHTML = `
@@ -162,7 +162,6 @@ export default async function decorate(block) {
   function closeModal() {
     modal.style.display = 'none';
   }
-
 }
 
 function parseCSV(text) {
@@ -187,26 +186,24 @@ function parseCSV(text) {
       } else {
         field += char;
       }
+    } else if (char === '"') {
+      inQuotes = true;
+    } else if (char === ',') {
+      row.push(field.trim());
+      field = '';
+    } else if (char === '\r' && text[i + 1] === '\n') {
+      row.push(field.trim());
+      rows.push(row);
+      row = [];
+      field = '';
+      i++; // Skip '\n'
+    } else if (char === '\n' || char === '\r') {
+      row.push(field.trim());
+      rows.push(row);
+      row = [];
+      field = '';
     } else {
-      if (char === '"') {
-        inQuotes = true;
-      } else if (char === ',') {
-        row.push(field.trim());
-        field = '';
-      } else if (char === '\r' && text[i + 1] === '\n') {
-        row.push(field.trim());
-        rows.push(row);
-        row = [];
-        field = '';
-        i++; // Skip '\n'
-      } else if (char === '\n' || char === '\r') {
-        row.push(field.trim());
-        rows.push(row);
-        row = [];
-        field = '';
-      } else {
-        field += char;
-      }
+      field += char;
     }
 
     i++;
