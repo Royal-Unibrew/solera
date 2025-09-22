@@ -2,6 +2,8 @@
 import { events } from '@dropins/tools/event-bus.js';
 
 import { tryRenderAemAssetsImage } from '@dropins/tools/lib/aem/assets.js';
+import { setFetchGraphQlHeaders } from '@dropins/storefront-product-discovery/api.js';
+import { getHeaders } from '@dropins/tools/lib/aem/configs.js';
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
@@ -9,6 +11,7 @@ import renderAuthCombine from './renderAuthCombine.js';
 import { renderAuthDropdown } from './renderAuthDropdown.js';
 import { fetchPlaceholders, rootLink } from '../../scripts/commerce.js';
 import decorateRoyalDeliveryDates from '../royal-delivery-dates/royal-delivery-dates.js';
+import { getCatalogServiceFilterHeader } from '../../scripts/company/cs-filter-header.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -303,6 +306,7 @@ export default async function decorate(block) {
 
     const show = state ?? !panel.classList.contains('nav-tools-panel--show');
     panel.classList.toggle('nav-tools-panel--show', show);
+    setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('cs'), 'x-filter-apl': getCatalogServiceFilterHeader() }));
   }
 
   // Lazy loading for mini cart fragment

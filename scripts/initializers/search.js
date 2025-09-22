@@ -7,12 +7,10 @@ import {
 import { getHeaders } from '@dropins/tools/lib/aem/configs.js';
 import { initializeDropin } from './index.js';
 import { fetchPlaceholders, commerceEndpointWithQueryParams } from '../commerce.js';
-import { getCatalogServiceFilterHeader } from '../company/cs-filter-header.js';
 
 await initializeDropin(async () => {
   setEndpoint(await commerceEndpointWithQueryParams());
-  const filterHeader = getCatalogServiceFilterHeader();
-  setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('cs'), 'x-filter-apl': filterHeader }));
+  setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('cs') }));
 
   const labels = await fetchPlaceholders('placeholders/search.json');
   const langDefinitions = {
