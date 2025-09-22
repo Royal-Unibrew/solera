@@ -1,0 +1,17 @@
+ul.royal-delivery-dates-list {
+  width: 100%;
+  padding-inline-start: 20px;
+  box-sizing: border-box;
+}
+.royal-delivery-dates-list-item {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.royal-delivery-dates-panel {
+  min-width: 180px;
+  max-width: 300px;
+}
+

@@ -1,0 +1,96 @@
+/* Royal Company Popup Block Styles */
+.royal-company-popup-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0 0 0 / 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.royal-company-popup {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  min-width: 320px;
+  max-width: 90vw;
+  box-shadow: 0 2px 16px rgb(0 0 0 / 20%);
+}
+
+.royal-company-popup h2 {
+  margin-top: 0;
+}
+
+.royal-company-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.royal-company-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.royal-company-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.royal-company-list-item input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.royal-company-list-item.selected,
+.royal-company-list-item:has(input[type="radio"]:checked) {
+  background: #e6f0fa;
+}
+
+.royal-company-popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.royal-company-popup-loader {
+  display: inline-block;
+  margin-left: 1rem;
+  vertical-align: middle;
+}
+
+.royal-company-popup-loader .spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e6e6e6;
+  border-top: 3px solid #0077c8;
+  border-radius: 50%;
+  animation: royal-company-spinner 0.8s linear infinite;
+}
+
+@keyframes royal-company-spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.royal-company-popup-blocking-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.7);
+  z-index: 100;
+  cursor: not-allowed;
+  display: block;
+}

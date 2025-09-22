@@ -7,6 +7,7 @@ import {
   CUSTOMER_FORGOTPASSWORD_PATH,
   rootLink,
 } from '../../scripts/commerce.js';
+import royalCompanyPopup from '../royal-company-popup/royal-company-popup.js';
 
 function checkAndRedirect(redirections) {
   Object.entries(redirections).some(([currentPath, redirectPath]) => {
@@ -109,7 +110,20 @@ export function renderAuthDropdown(navTools) {
     }
   };
 
-  events.on('authenticated', (isAuthenticated) => {
+  events.on('authenticated', async (isAuthenticated) => {
+    if (isAuthenticated) {
+      // Show company selection popup after authentication
+      const token = getCookie('auth_dropin_user_token');
+      const popupBlock = document.createElement('div');
+      document.body.appendChild(popupBlock);
+      await royalCompanyPopup(popupBlock, {
+        token,
+        onCompanySelected: (company) => {
+          localStorage.setItem('selectedCompanyId', company.sap_customer_id);
+        },
+      });
+      document.body.removeChild(popupBlock);
+    }
     updateDropDownUI(isAuthenticated);
   });
 

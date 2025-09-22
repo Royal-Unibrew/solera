@@ -1,8 +1,8 @@
 {
   "public": {
     "default": {
-      "commerce-core-endpoint": "https://integration-5ojmyuq-jfnrrjujytm76.us-a1.magentosite.cloud/graphql",
-      "commerce-endpoint": "https://catalog-service-sandbox.adobe.io/graphql",
+      "commerce-core-endpoint": "https://edge-sandbox-graph.adobe.io/api/9c513f69-8c41-4008-a1ec-b07723cf7f79/graphql",
+      "commerce-endpoint": "https://edge-sandbox-graph.adobe.io/api/9c513f69-8c41-4008-a1ec-b07723cf7f79/graphql",
       "headers": {
         "all": {
           "Store": "dk_da "
@@ -29,8 +29,8 @@
       },
       "plugins": {
         "picker": {
-           "rootCategory": 2
-         }
+          "rootCategory": 2
+        }
       }
     }
   }

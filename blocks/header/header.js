@@ -8,6 +8,7 @@ import { loadFragment } from '../fragment/fragment.js';
 import renderAuthCombine from './renderAuthCombine.js';
 import { renderAuthDropdown } from './renderAuthDropdown.js';
 import { fetchPlaceholders, rootLink } from '../../scripts/commerce.js';
+import decorateRoyalDeliveryDates from '../royal-delivery-dates/royal-delivery-dates.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -209,6 +210,12 @@ export default async function decorate(block) {
   }
 
   const navTools = nav.querySelector('.nav-tools');
+
+  /** Delivery Dates */
+  const deliveryDatesContainer = document.createElement('div');
+  deliveryDatesContainer.className = 'nav-delivery-dates nav-tools-wrapper';
+  navTools.append(deliveryDatesContainer);
+  decorateRoyalDeliveryDates(deliveryDatesContainer);
 
   /** Wishlist */
   const wishlist = document.createRange().createContextualFragment(`

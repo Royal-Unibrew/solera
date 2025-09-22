@@ -293,6 +293,7 @@ const TYPE_NAME_TABLE = {
   [TYPE_CLASS$1]: 'class',
   [TYPE_ARRAY_ARRAY]: 'Array<array>',
 };
+
 function getTypeName(inputObj, useValueOf = true) {
   if (inputObj === null) return TYPE_NULL;
   let obj = inputObj;
@@ -320,11 +321,13 @@ function getTypeName(inputObj, useValueOf = true) {
       return TYPE_OBJECT;
   }
 }
+
 function getTypeNames(inputObj) {
   const type1 = getTypeName(inputObj);
   const type2 = getTypeName(inputObj, false);
   return [type1, type2];
 }
+
 function matchType(actuals, expectedList, argValue, context, toNumber, toString) {
   const actual = actuals[0];
   if (expectedList.findIndex(
@@ -365,8 +368,8 @@ function matchType(actuals, expectedList, argValue, context, toNumber, toString)
   if (expected === -1) [expected] = expectedList;
   if (expected === TYPE_ANY$1) return argValue;
   if (expected === TYPE_ARRAY_STRING$1
-      || expected === TYPE_ARRAY_NUMBER
-      || expected === TYPE_ARRAY$1) {
+    || expected === TYPE_ARRAY_NUMBER
+    || expected === TYPE_ARRAY$1) {
     if (expected === TYPE_ARRAY$1) {
       if (actual === TYPE_ARRAY_NUMBER || actual === TYPE_ARRAY_STRING$1) return argValue;
       return argValue === null ? [] : [argValue];
@@ -415,12 +418,14 @@ function isArray(obj) {
   }
   return false;
 }
+
 function isObject(obj) {
   if (obj !== null) {
     return Object.prototype.toString.call(obj) === '[object Object]';
   }
   return false;
 }
+
 function getValueOf(a) {
   if (a === null || a === undefined) return a;
   if (isArray(a)) {
@@ -429,6 +434,7 @@ function getValueOf(a) {
   if (typeof (a.valueOf) !== 'function') return a;
   return a.valueOf();
 }
+
 function strictDeepEqual(lhs, rhs) {
   const first = getValueOf(lhs);
   const second = getValueOf(rhs);
@@ -490,6 +496,7 @@ const {
   TYPE_ARRAY_STRING,
   TYPE_ARRAY,
 } = dataTypes;
+
 function isFalse(value) {
   if (value === null) return true;
   const obj = getValueOf(value);
@@ -509,9 +516,11 @@ function isFalse(value) {
   }
   return !obj;
 }
+
 function objValues(obj) {
   return Object.values(obj);
 }
+
 class TreeInterpreter {
   constructor(runtime, globals, toNumber, toString, debug, language) {
     this.runtime = runtime;
@@ -537,7 +546,8 @@ class TreeInterpreter {
               this.debug.push(`Failed to find: '${node.name}'`);
               const available = Object.keys(value).map((a) => `'${a}'`).toString();
               if (available.length) this.debug.push(`Available fields: ${available}`);
-            } catch (e) {}
+            } catch (e) {
+            }
             return null;
           }
           return field;
@@ -771,6 +781,7 @@ class TreeInterpreter {
       }
       return actualValue;
     }
+
     let [start, stop, step] = sliceParams;
     if (step === null) {
       step = 1;
@@ -886,24 +897,28 @@ const skipChars = {
   '\t': true,
   '\n': true,
 };
+
 function isNum(ch) {
   return (ch >= '0' && ch <= '9') || (ch === '.');
 }
+
 function isAlphaNum(ch) {
   return (ch >= 'a' && ch <= 'z')
-           || (ch >= 'A' && ch <= 'Z')
-           || (ch >= '0' && ch <= '9')
-           || ch === '_';
+    || (ch >= 'A' && ch <= 'Z')
+    || (ch >= '0' && ch <= '9')
+    || ch === '_';
 }
+
 function isIdentifier(stream, pos) {
   const ch = stream[pos];
   if (ch === '$') {
     return stream.length > pos && isAlphaNum(stream[pos + 1]);
   }
   return (ch >= 'a' && ch <= 'z')
-          || (ch >= 'A' && ch <= 'Z')
-          || ch === '_';
+    || (ch >= 'A' && ch <= 'Z')
+    || ch === '_';
 }
+
 class Lexer {
   constructor(allowedGlobalNames = [], debug = []) {
     this._allowedGlobalNames = allowedGlobalNames;
@@ -1056,7 +1071,7 @@ class Lexer {
       let current = this._current;
       if (!isAlphaNum(stream[current])) foundNonAlpha = true;
       if (stream[current] === '\\' && (stream[current + 1] === '\\'
-                                             || stream[current + 1] === '"')) {
+        || stream[current + 1] === '"')) {
         current += 2;
       } else {
         current += 1;
@@ -1070,7 +1085,8 @@ class Lexer {
         this.debug.push(`Suspicious quotes: ${val}`);
         this.debug.push(`Did you intend a literal? '${val.replace(/"/g, '')}'?`);
       }
-    } catch (e) {}
+    } catch (e) {
+    }
     return JSON.parse(val);
   }
 
@@ -1081,7 +1097,7 @@ class Lexer {
     while (stream[this._current] !== "'" && this._current < maxLength) {
       let current = this._current;
       if (stream[current] === '\\' && (stream[current + 1] === '\\'
-                                             || stream[current + 1] === "'")) {
+        || stream[current + 1] === "'")) {
         current += 2;
       } else {
         current += 1;
@@ -1196,6 +1212,7 @@ class Lexer {
         return false;
       }
     }
+
     this._current += 1;
     const start = this._current;
     const maxLength = stream.length;
@@ -1208,7 +1225,7 @@ class Lexer {
         if (stream[current] === '"') inQuotes = !inQuotes;
         if (inQuotes && stream[current + 1] === '`') current += 2;
         else if (stream[current] === '\\' && (stream[current + 1] === '\\'
-                                              || stream[current + 1] === '`')) {
+          || stream[current + 1] === '`')) {
           current += 2;
         } else {
           current += 1;
@@ -1308,6 +1325,7 @@ const bindingPower = {
   [TOK_LBRACKET]: 55,
   [TOK_LPAREN]: 60,
 };
+
 class Parser {
   constructor(allowedGlobalNames = []) {
     this._allowedGlobalNames = allowedGlobalNames;
@@ -1411,7 +1429,7 @@ class Parser {
         return { type: 'Projection', children: [left, right] };
       case TOK_LBRACKET:
         if (this._lookahead(0) === TOK_STAR
-            && this._lookahead(1) === TOK_RBRACKET) {
+          && this._lookahead(1) === TOK_RBRACKET) {
           this._advance();
           this._advance();
           right = this._parseProjectionRHS(bindingPower.Star);
@@ -1528,7 +1546,7 @@ class Parser {
         return this._parseComparator(left, tokenName);
       case TOK_LBRACKET:
         if (this._lookahead(0) === TOK_STAR
-            && this._lookahead(1) === TOK_RBRACKET) {
+          && this._lookahead(1) === TOK_RBRACKET) {
           this._advance();
           this._advance();
           right = this._parseProjectionRHS(bindingPower.Star);
@@ -1706,13 +1724,16 @@ class Parser {
   _parseMultiselectHash() {
     const pairs = [];
     const identifierTypes = [TOK_UNQUOTEDIDENTIFIER, TOK_QUOTEDIDENTIFIER];
-    let keyToken; let keyName; let value; let
+    let keyToken;
+    let keyName;
+    let value;
+    let
       node;
     if (this._lookahead(0) === TOK_RBRACE) {
       this._advance();
       return { type: 'MultiSelectHash', children: [] };
     }
-    for (;;) {
+    for (; ;) {
       keyToken = this._lookaheadToken(0);
       if (identifierTypes.indexOf(keyToken.type) < 0) {
         throw new Error(`Expecting an identifier token, got: ${
@@ -1743,11 +1764,14 @@ function offsetMS(dateObj, timeZone) {
   const result = (((hours || 0) * 60) + 1 * (minutes || 0)) * 60 * 1000;
   return sign === '-' ? result * -1 : result;
 }
+
 function round(num, digits) {
   const precision = 10 ** digits;
   return Math.round(num * precision) / precision;
 }
+
 const MS_IN_DAY = 24 * 60 * 60 * 1000;
+
 function adjustTimeZone(dateObj, timeZone) {
   if (dateObj === null) return null;
   let baseDate = Date.UTC(
@@ -1762,6 +1786,7 @@ function adjustTimeZone(dateObj, timeZone) {
   baseDate += offsetMS(dateObj, timeZone);
   return new Date(baseDate);
 }
+
 function openFormulaFunctions(valueOf, toString, toNumber, debug = []) {
   return {
     and: {
@@ -1867,12 +1892,14 @@ function openFormulaFunctions(valueOf, toString, toNumber, debug = []) {
         const name = n.toString();
         const items = [];
         if (source === null) return items;
+
         function scan(node) {
           Object.entries(node).forEach(([k, v]) => {
             if (k === name) items.push(v);
             if (typeof v === 'object') scan(v);
           });
         }
+
         scan(source);
         return items;
       },
@@ -2092,7 +2119,7 @@ function openFormulaFunctions(valueOf, toString, toNumber, debug = []) {
         const text = toString(args[0]);
         const words = text.split(' ');
         const properWords = words.map((word) => word.charAt(0).toUpperCase()
-            + word.slice(1).toLowerCase());
+          + word.slice(1).toLowerCase());
         return properWords.join(' ');
       },
       _signature: [
@@ -2467,6 +2494,7 @@ function functions(
     TYPE_ARRAY_NUMBER,
     TYPE_ARRAY_STRING,
   } = dataTypes;
+
   function createKeyFunction(exprefNode, allowedTypes) {
     return (x) => {
       const current = runtime.interpreter.visit(exprefNode, x);
@@ -2478,6 +2506,7 @@ function functions(
       return current;
     };
   }
+
   const functionMap = {
     abs: {
       _func: (resolvedArgs) => Math.abs(resolvedArgs[0]),
@@ -2850,6 +2879,7 @@ const {
   TYPE_CLASS,
   TYPE_ANY,
 } = dataTypes;
+
 function getToNumber(stringToNumber, debug = []) {
   return (value) => {
     const n = getValueOf(value);
@@ -2866,22 +2896,27 @@ function getToNumber(stringToNumber, debug = []) {
     return 0;
   };
 }
+
 function toString(a) {
   if (a === null || a === undefined) return '';
   return a.toString();
 }
+
 const defaultStringToNumber = ((str) => {
   const n = +str;
   return Number.isNaN(n) ? 0 : n;
 });
+
 function isClass(obj) {
   if (obj === null) return false;
   if (Array.isArray(obj)) return false;
   return obj.constructor.name !== 'Object';
 }
+
 function matchClass(arg, expectedList) {
   return expectedList.includes(TYPE_CLASS) && isClass(arg);
 }
+
 class Runtime {
   constructor(debug, toNumber, customFunctions = {}) {
     this.strictDeepEqual = strictDeepEqual;
@@ -2916,14 +2951,14 @@ class Runtime {
       if (args.length < signature.length) {
         pluralized = signature.length === 1 ? ' argument' : ' arguments';
         throw new Error(`ArgumentError: ${argName}() `
-        + `takes at least${signature.length}${pluralized
-        } but received ${args.length}`);
+          + `takes at least${signature.length}${pluralized
+          } but received ${args.length}`);
       }
     } else if (args.length < argsNeeded || args.length > signature.length) {
       pluralized = signature.length === 1 ? ' argument' : ' arguments';
       throw new Error(`ArgumentError: ${argName}() `
-      + `takes ${signature.length}${pluralized
-      } but received ${args.length}`);
+        + `takes ${signature.length}${pluralized
+        } but received ${args.length}`);
     }
     if (!bResolved) return;
     let currentSpec;
@@ -2945,6 +2980,7 @@ class Runtime {
     return functionEntry._func.call(this, resolvedArgs, data, interpreter);
   }
 }
+
 class Formula {
   constructor(debug, customFunctions, stringToNumberFn) {
     this.debug = debug;
@@ -3013,6 +3049,7 @@ class JsonFormula {
     return this.formula.compile(expression, allowedGlobalNames);
   }
 }
+
 function jsonFormula(
   json,
   globals,
